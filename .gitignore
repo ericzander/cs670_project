@@ -172,4 +172,5 @@ cython_debug/
 
 # =====================
 
-data/oct24/*.csv
+data/*/*.csv
+notebooks/*.ipynb
