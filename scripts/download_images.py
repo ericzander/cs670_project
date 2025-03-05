@@ -23,19 +23,20 @@ def create_csv(top_n):
     spy = pd.read_csv(data_dir + "steamspy_insights.csv") 
     prom = pd.read_csv(data_dir + "promotional.csv")
 
-    # Owner range
+    # Get player numbers
     df = games.loc[:, ["app_id", "name"]]
-    df = df.merge(spy.loc[:, ["app_id", "owners_range"]], how="inner", on="app_id")
-    df[["min_owners", "max_owners"]] = df["owners_range"].str.split(" .. ", expand=True)
-    df["min_owners"] = df["min_owners"].str.replace(",", "").astype(float)
-    df["max_owners"] = df["max_owners"].str.replace(",", "").astype(float)
-    df = df.drop("owners_range", axis=1)
+    df = df.merge(spy.loc[:, ["app_id", "concurrent_users_yesterday"]], how="inner", on="app_id")
+    # df = df.merge(spy.loc[:, ["app_id", "owners_range"]], how="inner", on="app_id")
+    # df[["min_owners", "max_owners"]] = df["owners_range"].str.split(" .. ", expand=True)
+    # df["min_owners"] = df["min_owners"].str.replace(",", "").astype(float)
+    # df["max_owners"] = df["max_owners"].str.replace(",", "").astype(float)
+    # df = df.drop("owners_range", axis=1)
 
     # Get genres
     df = df.merge(genres, how="right", on="app_id")
 
     # Get top games
-    top = df.sort_values(by="max_owners", ascending=False).groupby("genre").head(top_n)
+    top = df.sort_values(by="concurrent_users_yesterday", ascending=False).groupby("genre").head(top_n)
     counts = top.genre.value_counts()
     top = top[top["genre"].map(counts) >= top_n]
 
@@ -72,6 +73,6 @@ def download_images():
                 print(f"Failed to download: {image_url}")
 
 if __name__ == "__main__":
-    create_csv(top_n=50)
+    create_csv(top_n=100)
     download_images()
     
