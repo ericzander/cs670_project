@@ -1,0 +1,20 @@
+Review Scores
+-------------
+MAE       : 1.0557
+RMSE      : 1.2410
+R-Squared : 0.1055
+
+Top Features:
+-------------
+price_euros: Importance = 0.0154, p-value = 1.0000
+date_missing: Importance = 0.0000, p-value = 0.0000
+release_month: Importance = 0.0002, p-value = 1.0000
+release_day: Importance = 0.0000, p-value = 0.9667
+1990's: Importance = 0.0000, p-value = 0.0000
+2.5D: Importance = 0.0000, p-value = 0.6667
+2D: Importance = 0.0526, p-value = 1.0000
+2D Fighter: Importance = 0.0000, p-value = 0.9667
+360 Video: Importance = 0.0000, p-value = 0.0000
+3D: Importance = 0.0001, p-value = 0.8000
+3D Fighter: Importance = 0.0000, p-value = 0.1667
+
